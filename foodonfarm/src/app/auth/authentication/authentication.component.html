@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div style="background-color:  #f2f2f2;padding-top: 40px;padding-bottom: 40px;">
+            <div style="text-align: center;">
+                <h2 style="font-weight: 400;">My account</h2>
+                <p><a style="text-decoration: none;color: black;" routerLink="">Home</a> / My account</p>
+            </div>
+    
+        </div><br>
+
+        <div  style="display:flex;align-items:center;margin-left: 180px;gap:30px">
+
+           <div class="login"  style="height:300px;max-width:600px;display:flex;align-items: center;flex-direction: column;">
+            <h3 style="text-align: center;font-weight: 300;">Login</h3><br>
+            <div  *ngIf="loginmobbox" style="height:300px;max-width:500px;border:2px dashed #e8e8e8;">
+                <div style="display: flex;flex-direction: column;align-items: flex-start;margin:50px;line-height: 2;">
+
+                    <form #ref="ngForm" (ngSubmit)="login(ref.value)" style="line-height: 2;">
+                        <label for="">Mobile no  <span style="color: firebrick;;">*</span></label>
+                        <input type="text" required name="mobile" ngModel style="width:400px ;background-color:none" class="form-control">
+
+                        <div *ngIf="ref.controls['mobile']?.errors&&ref.touched">
+                            <small style="color: firebrick;">mobile no is required</small>
+                        </div>
+
+                             <br>
+                        <button style="margin-left: 50px;" [disabled]="ref.invalid" style="background-color:#c54513;color:white;border:none;width:100px;" type="submit">Log in</button>
+                         
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div *ngIf="showotpbox" style="height:300px;max-width:500px;border:2px dashed #e8e8e8;">
+                <div style="display: flex;flex-direction: column;align-items: center;margin:50px;line-height: 2;">
+                    <div style="display:flex;align-items: center;gap:20px">
+                        <input type="text" maxlength="1" [(ngModel)]="otp[0]" style="height:40px;width:50px">
+                        <input type="text" maxlength="1" [(ngModel)]="otp[1]" style="height:40px;width:50px">
+                        <input type="text" maxlength="1" [(ngModel)]="otp[2]" style="height:40px;width:50px">
+                        <input type="text" maxlength="1" [(ngModel)]="otp[3]"  style="height:40px;width:50px">
+                    </div><br>
+                    <div><button type="button"  style="background-color:#c54513;color:white;border:none;width:100px;" (click)="submitotp()">submit</button></div>
+                </div>
+
+                 
+            </div>
+
+           </div>
+
+
+           <div class="register" style="height:auto;max-width:600px;display:flex;align-items: center;flex-direction: column;">
+            <h3 style="text-align: center;font-weight: 300;">Register</h3><br>
+            <div style="height:auto;max-width:500px;border:2px dashed #e8e8e8;">
+                <div style="display: flex;flex-direction: column;align-items: flex-start;margin:50px;line-height: 2;">
+                    <form #reff="ngForm" (ngSubmit)="registration(reff)">
+                        <label for="">Username <span style="color: firebrick;;">*</span></label>
+                        <input type="text" required style="width:400px ;background-color:none" ngModel name="username" class="form-control">
+                        <div *ngIf="reff.controls['username']?.errors&&reff.touched">
+                            <small style="color: firebrick;">Username is required</small>
+                        </div>
+
+                        <label for="">Mobile no <span style="color: firebrick;;">*</span></label>
+                        <input type="text" required  pattern="^[6-9]\d{9}$" name="mobileno" ngModel class="form-control">
+                        <div *ngIf="reff.controls['mobileno']?.errors&&reff.touched">
+                            <div *ngIf="reff.controls['mobileno']?.errors?.['required']">
+                                <small style="color: firebrick;">Mobile number is required</small>
+                              </div>
+                              <div *ngIf="reff.controls['mobileno']?.errors?.['pattern']">
+                                <small style="color: firebrick;">Mobile number must start with 6, 7, 8, or 9 and be 10 digits long</small>
+                              </div>
+                          </div>
+
+                        <label for="">Email Address</label>
+                        <input type="text"  name="email" ngModel style="width:400px ;background-color:none" class="form-control">
+                        
+
+                        <label for="">Password <span style="color: firebrick;;">*</span></label>
+                        <input type="password" required name="password" ngModel class="form-control">
+                        <div *ngIf="reff.controls['password']?.errors&&reff.touched">
+                            <small style="color: firebrick;">password is required</small>
+                          </div>
+                             <br>
+                        <button [disabled]="reff.invalid" style="margin-left: 50px;"style="background-color:#c54513;color:white;border:none;width:100px;" type="submit">Register</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+           </div>
+
+
+        </div>
+
+
+        <div class="">
+
+
+        </div>
+    </div>
+</body>
+</html>

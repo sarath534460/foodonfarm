@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div style="background-color:  #f2f2f2;padding-top: 40px;padding-bottom: 40px;">
+            <div style="text-align: center;">
+                <h2 style="font-weight: 400;">Admin</h2>
+                <p><a routerLink="" style="text-decoration: none;color: black;">Home</a>/ Admin</p>
+            </div>
+    
+        </div>
+       
+        <div style="display:flex;align-items: center;gap:80px;background-color: rgb(245, 242, 226);padding:20px">
+            <div>
+                <button (click)="senddata('addcategory')" style="background-color: skyblue;border:none;padding:10px;border-radius: 5px;color:white" class="ml-4" type="button">Add Category</button>
+            </div>
+            <div>
+                <button (click)="senddata('addproduct')" style="background-color: skyblue;border:none;padding:10px;border-radius: 5px;color:white" type="button">Add Product</button>
+            </div>
+            <div>
+                <button (click)="senddata('showorders')" style="background-color: skyblue;border:none;padding:10px;border-radius: 5px;color:white" type="button">Show Orders</button>
+            </div>
+
+            <div>
+                <button (click)="senddata('allusers')" style="background-color: skyblue;border:none;padding:10px;border-radius: 5px;color:white" type="button">Show All Users</button>
+            </div>
+        </div>
+
+        <div *ngIf="types=='addcategory'" style="margin-left:150px;width:500px">
+
+           <form style="display:flex;align-items: flex-start;flex-direction: column;margin-top:20px;line-height:1;"   #ref="ngForm" (ngSubmit)="addcat(ref)"> 
+            <label>categoryname:</label>
+            <input type="text" class="form-control" width="250px" name="categoryname" ngModel >
+            <label>Description:</label>
+            <input  class="form-control" type="text" name="description" ngModel >
+            <input type="file" (change)="previewImage($event)"><br>
+            <button type="submit">add category</button>
+
+           </form>
+        </div>
+
+        <div *ngIf="types=='addproduct'" >
+          <div style="margin-left: 150px;width:500px;margin-top: 50px;">
+           
+            <div>
+                <!-- Category Selection Dropdown -->
+                <label>Select Category:</label>
+                <select (change)="selectedcateg($event.target?.value) ">
+                  <option class="form-control" *ngFor="let x of allcategories" [value]="x.categoryname">{{ x.categoryname }}</option>
+                </select>
+              
+                <form [formGroup]="selectedformgroup" *ngIf="selectedformgroup">
+
+                    <div *ngFor="let key of selectedcategory | keyvalue">
+                      
+                      <!-- File Upload -->
+                      <div *ngIf="selectedcategory[key.key]?.type === 'file'">
+                        <label>{{ key.key }}</label>
+                        <input type="file" class="form-control"  (change)="previewImage($event,key.key)" />
+                      </div><br>
+                  
+                      <!-- Normal Text Inputs -->
+                      <div *ngIf="selectedcategory[key.key]?.type === 'text'">
+                        <label>{{ key.key }}</label>
+                        <input type="text" class="form-control" [formControlName]="key.key" />
+                      </div><br>
+                  
+                      <!-- Textarea -->
+                      <div *ngIf="selectedcategory[key.key]?.type === 'textarea'">
+                        <label>{{ key.key }}</label>
+                        <textarea class="form-control"  [formControlName]="key.key"></textarea>
+                      </div><br>
+                  
+                              <!-- Handling Arrays (Labels Moved Outside Inner Loop) -->
+                                   <!-- Handling Arrays -->
+                             <div *ngIf="selectedcategory[key.key] instanceof Array">
+                                    
+                              <label>{{ key.key }}</label>  
+                               <div formArrayName="{{ key.key }}">
+                              <div *ngFor="let group of selectedformgroup.get(key.key)?.controls; let i = index" [formGroupName]="i">
+        
+                             <!-- Display Labels for Each Input Field -->
+                              <div *ngFor="let subkey of selectedcategory[key.key][0] | keyvalue">
+                             <label *ngIf="i === 0">{{ subkey.key }}</label>  <!-- Labels displayed only once per column -->
+                             <input type="text" class="form-control" [formControlName]="subkey.key" /><br>
+                            </div>
+        
+                          <button *ngIf="i > 0" (click)="deleteField(key.key, i)" type="button" style="background-color: red; color: white; border: none; padding: 5px 10px;">
+                              Delete
+                          </button>
+                          <!-- "Add Field" Button Appears Only After Last Field Set -->
+                           <button *ngIf="i === (selectedformgroup.get(key.key)?.controls.length - 1)" 
+                    
+                            (click)="add(key.key)" 
+                          type="button" style="background-color:greenyellow;border:none;padding: 5px 10px;">
+                             Add Field
+                     </button>
+  
+             </div>
+          </div>
+         </div>
+  
+                    </div>
+                   <br>
+                    <button  style="background-color:rgb(26, 192, 183);border:none;padding: 5px 50px;margin-bottom:100px" type="submit" (click)="sdf()">Submit</button>
+                  </form>
+                  
+              
+              </div>
+              
+
+         
+
+          </div>
+
+        </div>
+
+     
+        <!-- <form [formGroup]="reac">
+            <input type="text" formControlName="name">
+            
+            <div formGroupName="arito">
+              <input type="text" formControlName="kl">
+              <input type="text" formControlName="drgl">
+            </div>
+          
+            <div formArrayName="ram">
+                <div *ngFor="let control of reac.get('ram')['controls']; let i = index">
+                    <input type="text" [formControlName]="i">
+              </div>
+            </div>
+          
+            <button type="button" (click)="sdf()">submit</button>
+          </form> -->
+
+        
+
+    </div>
+</body>
+</html>

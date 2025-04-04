@@ -1,0 +1,12 @@
+.active{
+    color:red
+}
+
+.wishlist:hover{
+    color:red
+}
+
+body{
+    font-family: Fira Sans;
+}
+

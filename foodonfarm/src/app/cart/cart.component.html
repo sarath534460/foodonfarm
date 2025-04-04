@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="cart-side" [ngClass]="{ 'active': open }">
+    <div class="cart-header">
+        <h4 style="text-align: center; margin-top: 30px; font-weight: 400;">Your Cart</h4>
+        <button class="close-btn" (click)="closeCart()">x</button>
+        <hr>
+    </div>
+  
+    <div style="margin-left: 20px;">
+        <div *ngFor="let x of cartItems">
+            <div *ngFor="let y of x.carts" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                <img style="cursor: pointer; object-fit: cover; width: 75px;" [src]="'data:image/jpeg;base64,' + y?.productimage" height="75">
+  
+                <div>
+                    <span style="text-decoration: line-through; color: gray;margin-right: 5px;">₹{{ y.selectedweight.actualprice }}</span>
+                    <span>₹{{ y.selectedweight.discountprice }}</span>
+                </div>
+  
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button type="button" (click)="desc(y)"style="height: 30px; width: 30px; font-size: 18px; background-color: brown;color: white;display: flex; align-items: center; justify-content: center;border:1px solid rgb(189, 96, 96)">-</button>
+                    <span>{{ y.quantity}}</span>
+                    <button type="button" (click)="inc(y)" style="height: 30px; width: 30px; font-size: 18px; background-color: brown;color:white;display: flex; align-items: center; justify-content: center;border:1px solid rgb(189, 96, 96)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="cart-footer">
+        <button style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer;">
+            Proceed to Checkout
+        </button>
+    </div>
+  </div>
+  
+</body>
+</html>

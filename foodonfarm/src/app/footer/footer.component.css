@@ -1,0 +1,29 @@
+
+.f{
+    color: #003134;
+    text-decoration: none;
+}
+
+.active{
+    color: red
+}
+
+body{
+    font-family: Fira Sans;
+}
+.title{
+    font-size: 80px;
+    color:pink
+}
+
+.title{
+    font-size: 20px;
+    background-color: rgb(230, 15, 83);
+    color: rgb(86, 5, 5);
+}
+
+
+
+
+
+
