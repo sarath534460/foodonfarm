@@ -15,7 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './auth.service';
 import { LogintimeInterceptor } from './logintime.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminModule } from './admin/admin.module';
+//import { AdminModule } from './admin/admin.module';
 import { ShopModule } from './shop/shop.module';
 import { ProductCategoryModule } from './product-category/product-category.module';
 import { ProductComponent } from './product/product.component';
@@ -39,7 +39,7 @@ import { CartComponent } from './cart/cart.component';
     AuthModule,
     HttpClientModule,
     FormsModule,
-    AdminModule,
+   // AdminModule,
     ShopModule,
     ProductCategoryModule
      

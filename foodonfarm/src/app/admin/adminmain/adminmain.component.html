@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,7 +48,6 @@
           <div style="margin-left: 150px;width:500px;margin-top: 50px;">
            
             <div>
-                <!-- Category Selection Dropdown -->
                 <label>Select Category:</label>
                 <select (change)="selectedcateg($event.target?.value) ">
                   <option class="form-control" *ngFor="let x of allcategories" [value]="x.categoryname">{{ x.categoryname }}</option>
@@ -58,42 +57,36 @@
 
                     <div *ngFor="let key of selectedcategory | keyvalue">
                       
-                      <!-- File Upload -->
                       <div *ngIf="selectedcategory[key.key]?.type === 'file'">
                         <label>{{ key.key }}</label>
                         <input type="file" class="form-control"  (change)="previewImage($event,key.key)" />
                       </div><br>
                   
-                      <!-- Normal Text Inputs -->
                       <div *ngIf="selectedcategory[key.key]?.type === 'text'">
                         <label>{{ key.key }}</label>
                         <input type="text" class="form-control" [formControlName]="key.key" />
                       </div><br>
                   
-                      <!-- Textarea -->
                       <div *ngIf="selectedcategory[key.key]?.type === 'textarea'">
                         <label>{{ key.key }}</label>
                         <textarea class="form-control"  [formControlName]="key.key"></textarea>
                       </div><br>
                   
-                              <!-- Handling Arrays (Labels Moved Outside Inner Loop) -->
-                                   <!-- Handling Arrays -->
+                             
                              <div *ngIf="selectedcategory[key.key] instanceof Array">
                                     
                               <label>{{ key.key }}</label>  
                                <div formArrayName="{{ key.key }}">
                               <div *ngFor="let group of selectedformgroup.get(key.key)?.controls; let i = index" [formGroupName]="i">
         
-                             <!-- Display Labels for Each Input Field -->
                               <div *ngFor="let subkey of selectedcategory[key.key][0] | keyvalue">
-                             <label *ngIf="i === 0">{{ subkey.key }}</label>  <!-- Labels displayed only once per column -->
+                             <label *ngIf="i === 0">{{ subkey.key }}</label>  
                              <input type="text" class="form-control" [formControlName]="subkey.key" /><br>
                             </div>
         
                           <button *ngIf="i > 0" (click)="deleteField(key.key, i)" type="button" style="background-color: red; color: white; border: none; padding: 5px 10px;">
                               Delete
                           </button>
-                          <!-- "Add Field" Button Appears Only After Last Field Set -->
                            <button *ngIf="i === (selectedformgroup.get(key.key)?.controls.length - 1)" 
                     
                             (click)="add(key.key)" 
@@ -121,25 +114,8 @@
         </div>
 
      
-        <!-- <form [formGroup]="reac">
-            <input type="text" formControlName="name">
-            
-            <div formGroupName="arito">
-              <input type="text" formControlName="kl">
-              <input type="text" formControlName="drgl">
-            </div>
-          
-            <div formArrayName="ram">
-                <div *ngFor="let control of reac.get('ram')['controls']; let i = index">
-                    <input type="text" [formControlName]="i">
-              </div>
-            </div>
-          
-            <button type="button" (click)="sdf()">submit</button>
-          </form> -->
-
         
 
     </div>
 </body>
-</html>
+</html> -->
